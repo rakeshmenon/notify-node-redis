@@ -34,7 +34,7 @@ on('connection', function (socket) {
 
     // Receive the ID
     socket.on('join', function(channelpre, id){
-      var channel = channelpre + id;
+      var channel = channelpre + ":" + id;
       console.log("Connecting to redis: " + channel);
 
       // store in the socket our connection
@@ -57,17 +57,17 @@ on('connection', function (socket) {
 router.post('/', function(req, res) {
 	var result = {};
 
-	console.log(result);
-
 	for(prop in req.body) {
-		if(typeof req.body[prop] === "string")
+		console.log("Prop:" + prop + "::" + req.body[prop]);
+
+    if(typeof req.body[prop] === "string")
 			result[prop] = req.body[prop];
 		else
 			result[prop] = JSON.parse(req.body[prop]);
 	}
 
-	console.log("Channel:" + (req.body.channel + req.body.id));
-	redisClient.publish(req.body.channel + req.body.id, result);
+	console.log("Channel:" + (req.body.channel + ':' + req.body.id));
+	redisClient.publish(req.body.channel + ':' + req.body.id, result);
 
 	res.json(result);
 });
