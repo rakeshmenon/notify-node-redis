@@ -1,6 +1,8 @@
 notify-node-redis
 =================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/rakeshmenon/notify-node-redis.svg)](https://greenkeeper.io/)
+
 Pre-alpha release
 
 
